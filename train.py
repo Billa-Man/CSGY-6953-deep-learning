@@ -254,7 +254,7 @@ def train_model(epochs=200, lr=0.1, weight_decay=5e-4, max_grad_norm=1.0, batch_
         
         # Save model checkpoint if it's the best train accuracy so far
         if train_metrics["train_acc"] > best_train_acc:
-            checkpoint_path = f'/scratch/ky2684/dl-project-1/cifar-classification/ckpts/best_train_acc_model.pth'
+            checkpoint_path = f'/scratch/ky2684/CSGY-6953-deep-learning/ckpts/best_model.pth'
             torch.save({
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
@@ -282,7 +282,7 @@ def train_model(epochs=200, lr=0.1, weight_decay=5e-4, max_grad_norm=1.0, batch_
         type="model",
         description="Final trained model"
     )
-    model_artifact.add_file("/scratch/ky2684/dl-project-1/cifar-classification/ckpts/best_model.pth")
+    model_artifact.add_file("/scratch/ky2684/CSGY-6953-deep-learning/ckpts/best_model.pth")
     wandb.log_artifact(model_artifact)
     
     # Finish the run
@@ -323,18 +323,18 @@ def test_model(model, test_loader, device):
     results_df = pd.DataFrame({'ID': ids, 'Labels': predictions})
     
     # Save the results to a CSV file
-    results_df.to_csv('submission_final_final.csv', index=False)
+    results_df.to_csv('submission_final.csv', index=False)
     
     logger.info("Predictions saved to submission.csv")
 
 def test_model_fn():
     # Load the batch
-    cifar10_batch = load_cifar_batch('/scratch/ky2684/dl-project-1/cifar-classification/data/cifar_test_nolabel.pkl')
+    cifar10_batch = load_cifar_batch('/scratch/ky2684/CSGY-6953-deep-learning/data/cifar_test_nolabel.pkl')
 
     # Extract images 
     test_images = cifar10_batch[b'data']
 
-    checkpoint = torch.load('/scratch/ky2684/dl-project-1/cifar-classification/ckpts/best_model.pth')
+    checkpoint = torch.load('/scratch/ky2684/CSGY-6953-deep-learning/ckpts/best_model.pth')
     model = densenet_cifar().to(device)
     model = nn.DataParallel(model)
     model.load_state_dict(checkpoint['model_state_dict'])
