@@ -41,7 +41,7 @@ def validate(model, val_loader, criterion, dataset_size):
     
     acc = 100 * correct / dataset_size
     
-    logger.info(f"Validation Accuracy: {acc:.2f}%")
+    print(f"Validation Accuracy: {acc:.2f}%")
 
 def validate_model_fn(batch_size=128, ):
     # Load the batch
@@ -64,7 +64,7 @@ def validate_model_fn(batch_size=128, ):
 
     val_dataset_size = len(val_dataset)
 
-    checkpoint = torch.load('/scratch/ky2684/CSGY-6953-deep-learning/ckpts/best_model.pth')
+    checkpoint = torch.load('/scratch/ky2684/CSGY-6953-deep-learning/ckpts/best_model_train_densenet27_600.pth')
     model = densenet_cifar().to(device)
     model = nn.DataParallel(model)
     model.load_state_dict(checkpoint['model_state_dict'])
@@ -123,5 +123,5 @@ def test_model_fn():
     test_model(model, test_dataloader, device)
 
 if __name__ == "__main__":
-    validate_model_fn()
-    # test_model_fn()
+    # validate_model_fn()
+    test_model_fn()
