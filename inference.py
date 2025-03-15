@@ -40,7 +40,7 @@ def test_model(model, test_loader, device):
     results_df = pd.DataFrame({'ID': ids, 'Labels': predictions})
     
     # Save the results to a CSV file
-    results_df.to_csv('submission_final_final.csv', index=False)
+    results_df.to_csv('submission_final.csv', index=False)
     
     logger.info("Predictions saved to submission.csv")
 
