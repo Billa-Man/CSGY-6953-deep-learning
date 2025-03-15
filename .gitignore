@@ -4,4 +4,6 @@
 
 __pycache__/
 
+virtual-env/
+
 data/
