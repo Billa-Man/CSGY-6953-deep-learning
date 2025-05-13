@@ -25,3 +25,8 @@
 2. Finetuning with LoRA
    *  The task is to build a text classification model fine-tuned using Low-Rank Adaptation (LoRA) to categorize news articles into one of four categories: World, Sports, Business, or Sci/Tech.
    *  `project2` directory contains the code for this project.  
+
+3. Jailbreaking Deep Models
+   *  The task is to launch effective adversarial
+attacks on production grade, publicly posted models, and degrade their performance.
+   *  `project3` directory contains the code for this project.  
